@@ -1,0 +1,1 @@
+python ~/bin/merge_pdf.py $@
