@@ -51,3 +51,4 @@ mv $2"/frontend/dist/" "/usr/share/"$1
 
 echo "REMEMBER TO SET ENV VARIABLES"
 echo "REMEMBER TO COPY SSH KEY TO DB SERVER"
+./update $1 $2
