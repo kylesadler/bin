@@ -1,0 +1,1 @@
+python ~/bin/split_pdf.py $@
