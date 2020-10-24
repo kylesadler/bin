@@ -2,7 +2,12 @@
 # assumes a web server has already been deployed with ./deploy.sh
 # this script deploys new changes to the already running instance
 
-echo "REMEMBER TO SET ENV VARIABLES"
+if [[ -z "$SSH_PKEY" ]]
+then
+    printf "\nREMEMBER TO SET ENVIRONMENT VARIABLES\n\n"
+    exit
+fi
+
 cd $2
 git pull
 npm i
@@ -13,4 +18,8 @@ rm -rf "/usr/share/"$1
 mv $2"/frontend/dist/" "/usr/share/"$1
 
 pm2 delete server
-pm2 start $2"/backend/server.js"
+
+LOG_DIR=$(cd; pwd)
+rm "$LOG_DIR/server.log"
+pm2 start $2"/backend/server.js" -e "$LOG_DIR/server.err" -o "$LOG_DIR/server.log"
+
