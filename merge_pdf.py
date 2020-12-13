@@ -1,15 +1,34 @@
-# usage merge_pdf.py file1 file2 file3 output_file
-
-import PyPDF2, sys, os
-
-print(sys.argv)
-pdf_merger = PyPDF2.PdfFileMerger()
-page_num = 1
-
-for pdf in sys.argv[1:-1]:
-	pdf_reader = PyPDF2.PdfFileReader(pdf)
-	pdf_merger.merge(page_num, pdf)
-	page_num += pdf_reader.getNumPages()
-
-
-pdf_merger.write(sys.argv[-1])
+%PDF-1.3
+1 0 obj
+<<
+/Type /Pages
+/Count 0
+/Kids [ ]
+>>
+endobj
+2 0 obj
+<<
+/Producer (PyPDF2)
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+>>
+endobj
+xref
+0 4
+0000000000 65535 f 
+0000000009 00000 n 
+0000000062 00000 n 
+0000000102 00000 n 
+trailer
+<<
+/Size 4
+/Root 3 0 R
+/Info 2 0 R
+>>
+startxref
+151
+%%EOF
