@@ -1,4 +1,4 @@
-
+#!/bin/bash
 install_nginx () {
     apt update && apt -y install nginx
 }
