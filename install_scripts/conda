@@ -1,0 +1,12 @@
+#!/bin/bash
+# this downloads and installs Anaconda on a machine 
+
+# keep this updated at https://repo.anaconda.com/archive/
+FILE_NAME=Anaconda3-2021.04-Linux-x86_64.sh
+
+install_conda {
+    curl -O https://repo.anaconda.com/archive/$FILE_NAME
+    chmod 700 $FILE_NAME
+    echo '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nyes\nyes'| bash $FILE_NAME
+    source ~/.bashrc
+}

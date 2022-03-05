@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# installs latest version of Node
+# NOTE: for most use cases, it is usually better to use a docker build
+#   starting from the official Node image
+
+
+install_node () {
+    # from https://github.com/nvm-sh/nvm
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    source ~/.bashrc
+    nvm install --lts
+    source ~/.bashrc
+}

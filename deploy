@@ -1,51 +1,20 @@
 #!/bin/bash 
 # this script sets up / deploys a mean stack webapp on a server from scratch
 # usage: deploy mydomain.com /path/to/repo
-# backend must be under backend/server.js
-# fronent must be in frontend subdir of repo
 
-# install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-source ~/.bashrc
-nvm install --lts
+PORT=""
+DOMAIN_NAME=""
 
-source ~/.bashrc
-npm config set user 0
-npm config set unsafe-perm true
-# echo 'n\n' | npm i @angular/cli -g
-npm i pm2 -g
+sudo apt install -y curl build-essential htop
 
-apt update
-apt install htop
-apt install nginx
+# generate ssh key
+echo '\n\n\n\n\n\n'| ssh-keygen -t rsa -b 4096
 
-echo "server {
-  listen 80 default_server;
-  listen [::]:80 default_server;
-  root "/usr/share/"$1"/client/"; # $1 is domain name
-  index index.html;
+#
+# set as GitHub deploy key
+#
 
-  location / {
-    try_files $uri$args $uri$args/ /index.html;
-  }
-  
-  location /api/ {
-    proxy_pass http://localhost:3000;
-    proxy_http_version 1.1;
-  }
-} " > /etc/nginx/sites-available/default
-service nginx restart
-source ~/.bashrc
+source install_scripts/install_docker && install_docker
+source install_scripts/nginx && install_nginx && deploy_nginx_http $PORT $DOMAIN_NAME
 
-cd $2"/frontend" # git repo directory
-npm install
-ng build --prod=true
-
-cd $2
-npm install
-
-pm2 start $2"/backend/server.js"
-
-mv $2"/frontend/dist/" "/usr/share/"$1
-
-./update $1 $2
+printf '\n# adding deploy and update scripts to $PATH\nexport PATH=$PATH:'$(eval echo "~/NR-Dashboard/scripts/") >> ~/.bashrc && source ~/.bashrc

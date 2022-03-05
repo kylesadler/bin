@@ -1,7 +1,0 @@
-#! /bin/bash
-# this downloads and installs Anaconda on a machine 
-
-curl -O https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh
-chmod 700 Anaconda3-2020.02-Linux-x86_64.sh
-echo '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nyes\nyes'| bash Anaconda3-2020.02-Linux-x86_64.sh
-source ~/.bashrc

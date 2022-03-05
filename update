@@ -8,18 +8,3 @@ then
     exit
 fi
 
-cd $2
-git pull
-npm i
-
-cd $2"/frontend"
-ng build --prod=true
-rm -rf "/usr/share/"$1
-mv $2"/frontend/dist/" "/usr/share/"$1
-
-pm2 delete server
-
-LOG_DIR=$(cd; pwd)
-rm "$LOG_DIR/server.log"
-pm2 start $2"/backend/server.js" -e "$LOG_DIR/server.err" -o "$LOG_DIR/server.log"
-
